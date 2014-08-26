@@ -1,5 +1,5 @@
 #lang typed/racket
-(require typed/data/gvector profile)
+(require "gvector.rkt")
 (define-type Counter (case-> (-> Exact-Nonnegative-Integer)
                              (-> Exact-Nonnegative-Integer Exact-Nonnegative-Integer)))
 (: counter : (-> Counter))
@@ -429,4 +429,4 @@
     [`(,e . ,(? list? es)) (app (sexp->surface e) (map sexp->surface es))]
     [_ (error 'barf)]))
 
-(profile (call-with-values (λ () (aval (file->surface "mini-church.sch"))) list))
+(time (call-with-values (λ () (aval (file->surface "mini-church.sch"))) list))
